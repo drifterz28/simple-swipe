@@ -78,26 +78,29 @@
                 },
                 function(swipe) {
                     // Minimum swipe length
-                    if(swipe.direction !== 'up' || swipe.direction !== 'down') {
+
+                    if(swipe.direction === 'left' || swipe.direction === 'right') {
                         swipe.event.preventDefault();
+                        console.log('event stoped');
                     }
+                    var targetParent = document.querySelector('#swipeBox');
                     var target = swipe.event.currentTarget;
                     var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 100;
                     console.log(docWidth);
                     console.log(target.getBoundingClientRect());
 
                     if(docWidth < target.getBoundingClientRect().left) {
-                        if (target.parentNode) {
-                            target.parentNode.removeChild(target);
-                        }
-                    } else {
-                        target.style.transform = 'translateX(0)';
-                        target.setAttribute('data-state', 'animate');
-                        setTimeout(function() {
-                            target.setAttribute('data-state', 'noAnimate');
-                            target.style.transform = 'initial';
-                        }, 300);
+                        targetParent.appendChild(target);
+                        //if (target.parentNode) {
+                        //    target.parentNode.removeChild(target);
+                        //}
                     }
+                    target.style.transform = 'translateX(0)';
+                    target.setAttribute('data-state', 'animate');
+                    setTimeout(function() {
+                        target.setAttribute('data-state', 'noAnimate');
+                        target.style.transform = 'initial';
+                    }, 300);
 
                     switch(swipe.direction) {
                         case 'left':

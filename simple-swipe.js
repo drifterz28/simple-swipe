@@ -43,7 +43,7 @@
             return isNaN(length) ? 0 : length;
         },
         touchStart: function (event) {
-            event.preventDefault();
+            //event.preventDefault();
             if (event.touches.length === 1) {
                 this.startX = event.touches[0].pageX;
                 this.startY = event.touches[0].pageY;
@@ -81,6 +81,7 @@
                 }, this.el);
             }
             this.touchCancel();
+            return true;
         },
         touchCancel: function () {
             delete this.startX;
