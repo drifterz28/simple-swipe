@@ -20,39 +20,82 @@
                 height: 100%;
                 padding-top: 60px;
             }
+            .card {
+                width: 300px;
+                height: 300px;
+                box-shadow: 0 0 10px rgba(0,0,0,.5);
+                overflow: hidden;
+                text-align: center;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .card img {
+                height: 300px;
+                width: auto;
+            }
         </style>
         <script type="text/javascript" src="simple-swipe.js"></script>
     </head>
     <body>
         <div id="swipeBox">
-            <p>Swipe the page with one finger to change the background color</p>
-            <p>LEFT = ORANGE</p>
-            <p>RIGHT = GREEN</p>
-            <p>UP = MAROON</p>
-            <p>DOWN = PURPLE</p>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/city">
+            </div>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/food">
+            </div>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/cats">
+            </div>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/transport">
+            </div>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/people">
+            </div>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/nature">
+            </div>
+            <div class="card">
+                <img src="http://lorempixel.com/400/400/sports">
+            </div>
         </div>
 
         <script type="text/javascript">
-            var s = new SimpleSwipe(document.getElementById("swipeBox"),
-                undefined,
-                function (swipe, el) {
+            var s = new SimpleSwipe(document.querySelectorAll('.card'),
+                function(swipe) {
+                    var target = swipe.event.currentTarget;
+
+                    if(swipe.direction === 'right') {
+                        target.style.transform = 'translateX(' + swipe.length + 'px)';
+                        //console.log(swipe);
+                    }
+                },
+                function(swipe) {
                     // Minimum swipe length
-                    if (swipe.length < 72) {
-                        return;
+                    var target = swipe.event.currentTarget;
+                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                    console.log(docWidth);
+                    console.log(target.getBoundingClientRect());
+
+                    if(docWidth < target.getBoundingClientRect().left) {
+                        if (target.parentNode) {
+                            target.parentNode.removeChild(target);
+                        }
                     }
 
                     switch(swipe.direction) {
                         case 'left':
-                            el.style.backgroundColor = 'orange';
+                            target.style.backgroundColor = 'orange';
                             break;
                         case 'right':
-                            el.style.backgroundColor = 'green';
+                            target.style.backgroundColor = 'green';
                             break;
                         case 'up':
-                            el.style.backgroundColor = 'maroon';
+                            target.style.backgroundColor = 'maroon';
                             break;
                         case 'down':
-                            el.style.backgroundColor = 'purple';
+                            target.style.backgroundColor = 'purple';
                     }
                 });
         </script>
