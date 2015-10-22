@@ -29,6 +29,9 @@
                 margin: 20px auto;
                 padding: 20px;
             }
+            [data-state=animate] {
+                transition: all 0.2s ease;
+            }
             .card img {
                 height: 300px;
                 width: auto;
@@ -68,13 +71,15 @@
 
                     if(swipe.direction === 'right') {
                         target.style.transform = 'translateX(' + swipe.length + 'px)';
-                        //console.log(swipe);
+                    }
+                    if(swipe.direction === 'left') {
+                        target.style.transform = 'translateX(-' + swipe.length + 'px)';
                     }
                 },
                 function(swipe) {
                     // Minimum swipe length
                     var target = swipe.event.currentTarget;
-                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 100;
                     console.log(docWidth);
                     console.log(target.getBoundingClientRect());
 
@@ -82,6 +87,13 @@
                         if (target.parentNode) {
                             target.parentNode.removeChild(target);
                         }
+                    } else {
+                        target.style.transform = 'translateX(0)';
+                        target.setAttribute('data-state', 'animate');
+                        setTimeout(function() {
+                            target.setAttribute('data-state', 'noAnimate');
+                            target.style.transform = 'initial';
+                        }, 300);
                     }
 
                     switch(swipe.direction) {
@@ -97,6 +109,9 @@
                         case 'down':
                             target.style.backgroundColor = 'purple';
                     }
+                });
+                window.requestAnimationFrame(function(t) {
+                    console.log(t);
                 });
         </script>
     </body>
