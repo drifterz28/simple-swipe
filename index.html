@@ -78,6 +78,9 @@
                 },
                 function(swipe) {
                     // Minimum swipe length
+                    if(swipe.direction !== 'up' || swipe.direction !== 'down') {
+                        swipe.event.preventDefault();
+                    }
                     var target = swipe.event.currentTarget;
                     var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 100;
                     console.log(docWidth);

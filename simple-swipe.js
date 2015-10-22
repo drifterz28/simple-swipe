@@ -52,7 +52,7 @@
             }
         },
         touchMove: function (event) {
-            event.preventDefault();
+            //event.preventDefault();
             if (event.touches.length === 1) {
                 this.prevX = this.x;
                 this.prevY = this.y;
@@ -72,7 +72,7 @@
             }
         },
         touchEnd: function (event) {
-            event.preventDefault();
+            //event.preventDefault();
             if (this.callbackEnd) {
                 this.callbackEnd({
                     event: event,
