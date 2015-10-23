@@ -38,7 +38,7 @@
                 padding: 20px;
                 background: #fff;
                 box-sizing: border-box;
-                transition: all 0.1s ease;
+                /*transition: all 0.05s ease;*/
             }
             [data-state=animate] {
                 transition: all 0.2s ease;
@@ -51,7 +51,7 @@
         <script type="text/javascript" src="simple-swipe.js"></script>
     </head>
     <body>
-        <h1>V1.7.1</h1>
+        <h1>V1.7.4</h1>
         <div id="swipeBox">
             <div class="cardWrapper">
                 <div class="card">
@@ -97,6 +97,7 @@
                     var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
                     var clearBox = docWidth - (docWidth * .20);
                     var targetRect = target.getBoundingClientRect();
+                    var swipeStopLocationX = event.changedTouches[0].clientX;
                     if(swipe.direction === 'right') {
                         target.style.transform = 'translateX(' + swipe.length + 'px)';
                         //target.style.opacity = (targetRect.left / clearBox) / 2;
@@ -119,6 +120,7 @@
                     if(clearBox < swipeStopLocationX) {
                         target.style.transform = 'translateX(1000px)';
                         boxWrapper.style.height = 0;
+                        boxWrapper.style.padding = 0;
                         setTimeout(function() {
                             if (boxWrapper.parentNode) {
                                 boxWrapper.parentNode.removeChild(boxWrapper);
