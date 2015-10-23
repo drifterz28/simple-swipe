@@ -21,15 +21,24 @@
                 height: 100%;
                 padding-top: 60px;
             }
+            .cardWrapper {
+                width: 100%;
+                height: 320px;
+                box-sizing: border-box;
+                padding: 10px 0;
+                transition: all 0.8s ease;
+            }
             .card {
                 width: 300px;
                 height: 300px;
                 box-shadow: 0 0 10px rgba(0,0,0,.5);
                 overflow: hidden;
                 text-align: center;
-                margin: 20px auto;
+                margin: 0 auto;
                 padding: 20px;
-                transition: all 0.05s ease;
+                background: #fff;
+                box-sizing: border-box;
+                transition: all 0.1s ease;
             }
             [data-state=animate] {
                 transition: all 0.2s ease;
@@ -42,28 +51,42 @@
         <script type="text/javascript" src="simple-swipe.js"></script>
     </head>
     <body>
-        <h1>V1.6.2</h1>
+        <h1>V1.7.1</h1>
         <div id="swipeBox">
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/city">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/city">
+                </div>
             </div>
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/food">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/food">
+                </div>
             </div>
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/cats">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/cats">
+                </div>
             </div>
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/transport">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/transport">
+                </div>
             </div>
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/people">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/people">
+                </div>
             </div>
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/nature">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/nature">
+                </div>
             </div>
-            <div class="card">
-                <img src="http://lorempixel.com/400/400/sports">
+            <div class="cardWrapper">
+                <div class="card">
+                    <img src="http://lorempixel.com/400/400/sports">
+                </div>
             </div>
         </div>
 
@@ -71,9 +94,12 @@
             var s = new SimpleSwipe(document.querySelectorAll('.card'),
                 function(swipe) {
                     var target = swipe.event.currentTarget;
-
+                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                    var clearBox = docWidth - (docWidth * .20);
+                    var targetRect = target.getBoundingClientRect();
                     if(swipe.direction === 'right') {
                         target.style.transform = 'translateX(' + swipe.length + 'px)';
+                        //target.style.opacity = (targetRect.left / clearBox) / 2;
                     }
                     if(swipe.direction === 'left') {
                         target.style.transform = 'translateX(-' + swipe.length + 'px)';
@@ -88,22 +114,24 @@
                     var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
                     var clearBox = docWidth - (docWidth * .20);
                     var swipeStopLocationX = event.changedTouches[0].clientX;
-                    console.log(docWidth + ' - ' + clearBox);
-                    console.log(event.changedTouches[0].clientX);
-
+                    var boxWrapper = target.parentNode;
+                    var targetRect = target.getBoundingClientRect();
                     if(clearBox < swipeStopLocationX) {
-                        targetParent.appendChild(target);
-                        //if (target.parentNode) {
-                        //    target.parentNode.removeChild(target);
-                        //}
+                        target.style.transform = 'translateX(1000px)';
+                        boxWrapper.style.height = 0;
+                        setTimeout(function() {
+                            if (boxWrapper.parentNode) {
+                                boxWrapper.parentNode.removeChild(boxWrapper);
+                            }
+                        }, 1000);
+                    } else {
+                        target.style.transform = 'translateX(0)';
+                        target.setAttribute('data-state', 'animate');
+                        setTimeout(function() {
+                            target.setAttribute('data-state', 'noAnimate');
+                            target.style.transform = 'initial';
+                        }, 300);
                     }
-                    target.style.transform = 'translateX(0)';
-                    target.setAttribute('data-state', 'animate');
-                    setTimeout(function() {
-                        target.setAttribute('data-state', 'noAnimate');
-                        target.style.transform = 'initial';
-                    }, 300);
-
                     switch(swipe.direction) {
                         case 'left':
                             target.style.backgroundColor = 'orange';
