@@ -114,7 +114,6 @@
             for(var i = 0; i < this.el.length; i++) {
                 this.el[i].addEventListener('touchcancel', this);
                 this.el[i].addEventListener('touchend', this);
-                this.el[i].addEventListener('touchleave', this);
                 this.el[i].addEventListener('touchmove', this);
                 this.el[i].addEventListener('touchstart', this);
             }
@@ -123,7 +122,6 @@
             for(var i = 0; i < this.el.length; i++) {
                 this.el[i].removeEventListener('touchcancel', this);
                 this.el[i].removeEventListener('touchend', this);
-                this.el[i].removeEventListener('touchleave', this);
                 this.el[i].removeEventListener('touchmove', this);
                 this.el[i].removeEventListener('touchstart', this);
             }

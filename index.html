@@ -84,12 +84,13 @@
                     }
                     var targetParent = document.querySelector('#swipeBox');
                     var target = swipe.event.currentTarget;
-                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 100;
-                    var clearBox = docWidth - (docWidth * .40 / 100);
-                    console.log(docWidth + ' _ ' + clearBox);
-                    console.log(event);
+                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                    var clearBox = docWidth - (docWidth * .20);
+                    var swipeStopLocationX = event.changedTouches[0].clientX;
+                    console.log(docWidth + ' - ' + clearBox);
+                    console.log(event.changedTouches[0].clientX);
 
-                    if(clearBox < target.getBoundingClientRect().left) {
+                    if(clearBox < swipeStopLocationX) {
                         targetParent.appendChild(target);
                         //if (target.parentNode) {
                         //    target.parentNode.removeChild(target);
