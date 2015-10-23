@@ -29,6 +29,7 @@
                 text-align: center;
                 margin: 20px auto;
                 padding: 20px;
+                transition: all 0.05s ease;
             }
             [data-state=animate] {
                 transition: all 0.2s ease;
@@ -78,19 +79,17 @@
                     }
                 },
                 function(swipe) {
-                    // Minimum swipe length
-
                     if(swipe.direction === 'left' || swipe.direction === 'right') {
                         swipe.event.preventDefault();
-                        console.log('event stoped');
                     }
                     var targetParent = document.querySelector('#swipeBox');
                     var target = swipe.event.currentTarget;
                     var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 100;
-                    console.log(docWidth);
-                    console.log(target.getBoundingClientRect());
+                    var clearBox = docWidth - (docWidth * .40 / 100);
+                    console.log(docWidth + ' _ ' + clearBox);
+                    console.log(event);
 
-                    if(docWidth < target.getBoundingClientRect().left) {
+                    if(clearBox < target.getBoundingClientRect().left) {
                         targetParent.appendChild(target);
                         //if (target.parentNode) {
                         //    target.parentNode.removeChild(target);
