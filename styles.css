@@ -27,6 +27,7 @@ body {
     overflow: hidden;
     margin: 10px auto 0;
     background: #fff;
+    position: relative;
 }
 .cardDetails {
     font-size: 18px;
@@ -43,8 +44,35 @@ body {
     height: 90px;
     background-repeat: no-repeat;
     background-position: 15px;
-    text-indent: 80px;
-    line-height: 90px;
+    padding: 0 10px 0 80px;
+    display: flex;
+}
+.cardTitle span {
+    align-self: center;
+}
+.swipe {
+    z-index: 100;
+}
+.swipe img {
+    width: 100%;
+    height: auto;
+}
+.swipe .cardDetails {
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+}
+.swipe .cardTitle {
+    position: absolute;
+    bottom: 80px;
+    text-indent: 10px;
+}
+.cardLinks {
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.6;
+    color: rgba(0,0,0,.54);
+    font-size: 16px;
 }
 .ha .cardTitle {
     background-color: #0D567B;
@@ -52,6 +80,10 @@ body {
 }
 .mha .cardTitle {
     background-color: #5FA0A3;
+    background-image: url(Digital-Health-Assistant-Icon.svg);
+}
+.mpa .cardTitle {
+    background-color: #4d8168;
     background-image: url(Digital-Health-Assistant-Icon.svg);
 }
 .challenges .cardTitle {
@@ -71,6 +103,7 @@ body {
     position: relative;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.11);
     text-indent: 10px;
+    transition: all .2s ease;
 }
 .welcomeCard::before {
     height: 3px;
