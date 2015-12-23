@@ -5,98 +5,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <title>Swipe Example</title>
         <link href='https://fonts.googleapis.com/css?family=Lato:400,900,300' rel='stylesheet' type='text/css'>
-        <style type="text/css">
-            html {
-                height: 100%;
-            }
-            body {
-                font-size: 24px;
-                font-family: 'Lato', sans-serif;
-                height: 100%;
-                margin: 0;
-                overflow-x: hidden;
-                padding: 10px;
-                background: #F2F2F2;
-            }
-            .swipeBox {
-                box-sizing: border-box;
-                height: 100%;
-                padding-top: 20px;
-            }
-            .cardWrapper {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 10px 0;
-                transition: all 0.8s ease;
-            }
-            .card {
-                min-width: 300px;
-                max-width: 320px;
-                box-shadow: 0 2px 2px 0 rgba(0,0,0,.11);
-                overflow: hidden;
-                margin: 0 auto;
-                background: #fff;
-                box-sizing: border-box;
-            }
-            .cardDetails {
-                font-size: 18px;
-                color: #000;
-                min-height: 80px;
-                line-height: 1.2;
-                font-weight: 300;
-                padding: 10px;
-            }
-            .cardTitle {
-                font-size: 22px;
-                font-weight: 700;
-                color: #FFF;
-                height: 90px;
-                background-repeat: no-repeat;
-                background-position: 15px;
-                text-indent: 80px;
-                line-height: 90px;
-            }
-            .ha .cardTitle {
-                background-color: #0D567B;
-                background-image: url(Health-Assessment-Icon.svg);
-            }
-            .mha .cardTitle {
-                background-color: #5FA0A3;
-                background-image: url(Digital-Health-Assistant-Icon.svg);
-            }
-            .challenges .cardTitle {
-                background-color: #5B5076;
-                background-image: url(Challenges-Icon.svg);
-            }
-            .rewards .cardTitle {
-                background-color: #90B253;
-                background-image: url(Rewards-Icon.svg);
-            }
-            .welcomeCard {
-                max-width: 320px;
-                height: 50px;
-                margin: 0 auto;
-                background: #fff;
-                line-height: 50px;
-                position: relative;
-                box-shadow: 0 2px 2px 0 rgba(0,0,0,.11);
-                text-indent: 10px;
-            }
-            .welcomeCard::before {
-                height: 3px;
-                background: linear-gradient(to right, rgba(114,35,77,1) 0%, rgba(114,35,77,1) 32%, rgba(221,38,108,1) 33%, rgba(221,38,108,1) 65%, rgba(65,169,199,1) 66%, rgba(65,169,199,1) 100%);
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: block;
-                width: 100%;
-            }
-            [data-state=animate] {
-                transition: all 0.2s ease;
-            }
-        </style>
-        <script type="text/javascript" src="simple-swipe.js"></script>
+        <link href='styles.css' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div class="swipeBox">
@@ -115,91 +24,20 @@
                     <div class="cardDetails">It's a perfect time to create a plan to improve your health</div>
                 </div>
             </div>
-            <div class="cardWrapper">
+                <div class="cardWrapper">
                 <div class="card challenges">
                     <div class="cardTitle">Challenges</div>
                     <div class="cardDetails">We've got healthy challenges starting soon. Want to get involved?</div>
                 </div>
             </div>
-            <div class="cardWrapper">
+                <div class="cardWrapper">
                 <div class="card rewards">
                     <div class="cardTitle">My Rewards</div>
                     <div class="cardDetails">Participate in the 2016 Reward Yourself Program</div>
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-            var currentHours = new Date().getHours();
-            var welcome = document.querySelector('.js-welcome');
-            var message = 'Good Morning';
-            if(currentHours >= 12 && currentHours < 18) {
-                message = 'Good Afternoon';
-            } else if (currentHours >= 18) {
-                message = 'Good Evening';
-            }
-            welcome.textContent = message;
-
-            var s = new SimpleSwipe(document.querySelectorAll('.swipe'),
-                function(swipe) {
-                    var target = swipe.event.currentTarget;
-                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-                    var clearBox = docWidth - (docWidth * .20);
-                    var targetRect = target.getBoundingClientRect();
-                    var swipeStopLocationX = event.changedTouches[0].clientX;
-                    if(swipe.direction === 'right') {
-                        target.style.transform = 'translateX(' + swipe.length + 'px)';
-                        //target.style.opacity = (targetRect.left / clearBox) / 2;
-                    }
-                    if(swipe.direction === 'left') {
-                        target.style.transform = 'translateX(-' + swipe.length + 'px)';
-                    }
-                },
-                function(swipe) {
-                    if(swipe.direction === 'left' || swipe.direction === 'right') {
-                        swipe.event.preventDefault();
-                    }
-                    var targetParent = document.querySelector('#swipeBox');
-                    var target = swipe.event.currentTarget;
-                    var docWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-                    var clearBox = docWidth - (docWidth * .20);
-                    var swipeStopLocationX = event.changedTouches[0].clientX;
-                    var boxWrapper = target.parentNode;
-                    var targetRect = target.getBoundingClientRect();
-                    if(clearBox < swipeStopLocationX) {
-                        target.style.transform = 'translateX(1000px)';
-                        boxWrapper.style.height = 0;
-                        boxWrapper.style.padding = 0;
-                        setTimeout(function() {
-                            if (boxWrapper.parentNode) {
-                                boxWrapper.parentNode.removeChild(boxWrapper);
-                            }
-                        }, 1000);
-                    } else {
-                        target.style.transform = 'translateX(0)';
-                        target.setAttribute('data-state', 'animate');
-                        setTimeout(function() {
-                            target.setAttribute('data-state', 'noAnimate');
-                            target.style.transform = 'initial';
-                        }, 300);
-                    }
-                    switch(swipe.direction) {
-                        //case 'left':
-                        //    target.style.backgroundColor = 'orange';
-                        //    break;
-                        //case 'right':
-                        //    target.style.backgroundColor = 'green';
-                        //    break;
-                        //case 'up':
-                        //    target.style.backgroundColor = 'maroon';
-                        //    break;
-                        //case 'down':
-                        //    target.style.backgroundColor = 'purple';
-                    }
-                });
-                window.requestAnimationFrame(function(t) {
-                    console.log(t);
-                });
-        </script>
+        <script src="simple-swipe.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>
