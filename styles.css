@@ -99,7 +99,6 @@ body {
         padding-right: 5px;
     }
     .card {
-        width: 300px;
         float: right;
     }
     .cardWrapper:nth-child(odd) {
