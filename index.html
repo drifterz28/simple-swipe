@@ -9,12 +9,12 @@
                 height: 100%;
             }
             body {
-                font-family: Helvetica, sans-serif;
                 font-size: 24px;
                 height: 100%;
                 margin: 0;
-                text-align: center;
                 overflow-x: hidden;
+                padding: 10px;
+                background: #F2F2F2;
             }
             #swipeBox {
                 box-sizing: border-box;
@@ -29,16 +29,40 @@
                 transition: all 0.8s ease;
             }
             .card {
-                width: 300px;
-                height: 300px;
-                box-shadow: 0 0 10px rgba(0,0,0,.5);
+                min-width: 300px;
+                box-shadow: 0 2px 2px 0 rgba(0,0,0,.11);
                 overflow: hidden;
-                text-align: center;
                 margin: 0 auto;
-                padding: 20px;
                 background: #fff;
                 box-sizing: border-box;
-                /*transition: all 0.05s ease;*/
+            }
+            .cardDetails {
+                font-size: 18px;
+                color: #000;
+                line-height: 1.2;
+                padding: 15px;
+            }
+            .cardTitle {
+                font-size: 22px;
+                color: #FFF;
+                height: 90px;
+                background-repeat: no-repeat;
+                background-position: 15px;
+                text-indent: 70px;
+                line-height: 90px;
+            }
+            .ha .cardTitle {
+                background-color: #0D567B;
+                background-image: url(Health-Assessment-Icon.svg);
+            }
+            .mha .cardTitle {
+                background: #5FA0A3;
+            }
+            .challenges .cardTitle {
+                background: #5B5076;
+            }
+            .rewards .cardTitle {
+                background: #90B253;
             }
             [data-state=animate] {
                 transition: all 0.2s ease;
@@ -51,41 +75,14 @@
         <script type="text/javascript" src="simple-swipe.js"></script>
     </head>
     <body>
-        <h1>V1.7.4</h1>
         <div id="swipeBox">
-            <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/city">
-                </div>
+            <div class="welcomeCard">
+                Good Morning, Chris!
             </div>
             <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/food">
-                </div>
-            </div>
-            <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/cats">
-                </div>
-            </div>
-            <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/transport">
-                </div>
-            </div>
-            <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/people">
-                </div>
-            </div>
-            <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/nature">
-                </div>
-            </div>
-            <div class="cardWrapper">
-                <div class="card">
-                    <img src="http://lorempixel.com/400/400/sports">
+                <div class="card ha">
+                    <div class="cardTitle">Health Assessment</div>
+                    <div class="cardDetails">Take the Health Assessment to get your Health Score and <em>earn</em> Rewards</div>
                 </div>
             </div>
         </div>
